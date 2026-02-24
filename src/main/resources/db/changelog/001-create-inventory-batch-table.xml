@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="001-create-inventory-batch-table" author="admin">
+        <createTable tableName="inventory_batch">
+            <column name="batch_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT"/>
+            <column name="product_name" type="VARCHAR(255)"/>
+            <column name="quantity" type="INT"/>
+            <column name="expiry_date" type="DATE"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+        <createIndex indexName="idx_product_id" tableName="inventory_batch">
+            <column name="product_id"/>
+        </createIndex>
+        <createIndex indexName="idx_expiry_date" tableName="inventory_batch">
+            <column name="expiry_date"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>
+
